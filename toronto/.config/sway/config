@@ -228,4 +228,9 @@ bar {
     font pango:Fira Code 12
 }
 
+font pango:Fira Code 10
+default_border pixel 1
+hide_edge_borders smart
+smart_gaps on
+
 include /etc/sway/config.d/*

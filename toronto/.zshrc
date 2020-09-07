@@ -112,7 +112,6 @@ export PATH="$PATH:/home/gsimmer/flutter/bin:/home/gsimmer/scripts:/home/gsimmer
 export GOPATH="/home/gsimmer/Projects/go"
 export DENO_INSTALL="/home/gsimmer/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
-source /home/gsimmer/.cargo/env
 
 # sfdx autocomplete setup
 SFDX_AC_ZSH_SETUP_PATH=/home/gsimmer/.cache/sfdx/autocomplete/zsh_setup && test -f $SFDX_AC_ZSH_SETUP_PATH && source $SFDX_AC_ZSH_SETUP_PATH;
