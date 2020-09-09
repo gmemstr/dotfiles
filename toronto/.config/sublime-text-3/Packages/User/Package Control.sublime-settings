@@ -1,0 +1,20 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Gitmoji",
+		"Gofmt",
+		"Golang Build",
+		"JSX",
+		"LSP",
+		"Markdown Extended",
+		"Package Control",
+		"Rust Enhanced",
+		"Terraform",
+		"Theme - Monokai Pro",
+		"TOML"
+	]
+}
