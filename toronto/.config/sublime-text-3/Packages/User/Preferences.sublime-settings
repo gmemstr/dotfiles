@@ -1,0 +1,15 @@
+{
+	"color_scheme": "Monokai Pro (Filter Spectrum).sublime-color-scheme",
+	"font_face": "JetBrains Mono",
+	"font_size": 12,
+	"ignored_packages":
+	[
+		"Rust",
+		"Vintage"
+	],
+	"rulers":
+	[
+		80
+	],
+	"theme": "Monokai Pro (Filter Spectrum).sublime-theme"
+}
