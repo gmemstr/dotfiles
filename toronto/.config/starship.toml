@@ -2,7 +2,9 @@ add_newline = true
 
 format = """
 [┌ $username$hostname](bold green)
-[│](bold green) $directory$git_status$git_branch$golang
+[│](bold green) $directory\
+$git_status$git_branch \
+$golang$python$rust
 [└─ $character](bold green)"""
 
 
@@ -30,8 +32,14 @@ style = "bold italic #87A752"
 
 [hostname]
 ssh_only = false
-format =  "@$hostname "
+format =  "@$hostname"
 disabled = false
 
 [golang]
-format = " [\\(go $version\\)](bold cyan)"
+format = "[\\(go $version\\)](bold cyan)"
+
+[python]
+format = "[\\(python $version\\)](bold green)"
+
+[rust]
+format = "[\\(rust $version\\)](bold red)"
