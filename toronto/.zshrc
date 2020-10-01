@@ -115,3 +115,4 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 # sfdx autocomplete setup
 SFDX_AC_ZSH_SETUP_PATH=/home/gsimmer/.cache/sfdx/autocomplete/zsh_setup && test -f $SFDX_AC_ZSH_SETUP_PATH && source $SFDX_AC_ZSH_SETUP_PATH;
+eval "$(starship init zsh)"

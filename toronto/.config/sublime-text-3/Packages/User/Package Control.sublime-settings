@@ -5,17 +5,25 @@
 	],
 	"installed_packages":
 	[
+		"Bats",
+		"Dockerfile Syntax Highlighting",
+		"Emmet",
 		"Gitmoji",
 		"Gofmt",
 		"Golang Build",
 		"JSX",
 		"LSP",
+		"LSP-bash",
+		"LSP-typescript",
 		"LSP-yaml",
 		"Markdown Extended",
 		"Package Control",
 		"Rust Enhanced",
+		"SublimeCodeIntel",
+		"Terminus",
 		"Terraform",
 		"Theme - Monokai Pro",
-		"TOML"
+		"TOML",
+		"TypeScript Syntax"
 	]
 }
