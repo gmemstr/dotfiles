@@ -7,6 +7,7 @@ My setup currently consists of:
 * zsh & [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh) as a shell
 * Wayland for desktop compositing
 * [Sway](https://github.com/swaywm/sway) for window management
+* [Starship](https://starship.rs/) for terminal prompt
 * [Sublime Text 3](https://www.sublimetext.com) for code/text/whatever editing
 * [Monokai Pro](https://monokai.pro) colour scheme where possible
 * [Wofi](https://hg.sr.ht/~scoopta/wofi) for app launching
@@ -20,3 +21,7 @@ configuraton
 This repository isn't a "catch all" yet, as I copy over and wrangle various
 configuration files.
 
+
+## Starship config
+
+[![Starship configuration preview](https://imgur.com/Y1wKQH9.png)](https://imgur.com/Y1wKQH9.png)
