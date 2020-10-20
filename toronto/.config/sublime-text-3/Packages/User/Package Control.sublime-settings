@@ -6,6 +6,7 @@
 	"installed_packages":
 	[
 		"Bats",
+		"Dartlight",
 		"Dockerfile Syntax Highlighting",
 		"Emmet",
 		"Gitmoji",
@@ -17,6 +18,7 @@
 		"LSP-typescript",
 		"LSP-yaml",
 		"Markdown Extended",
+		"Markdown Table Formatter",
 		"Package Control",
 		"Rust Enhanced",
 		"SublimeCodeIntel",
@@ -24,6 +26,7 @@
 		"Terraform",
 		"Theme - Monokai Pro",
 		"TOML",
-		"TypeScript Syntax"
+		"TypeScript Syntax",
+		"Vue Syntax Highlight"
 	]
 }

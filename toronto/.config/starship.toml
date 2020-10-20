@@ -3,14 +3,14 @@ add_newline = true
 format = """
 [┌ $username$hostname](bold green)
 [│](bold green) $directory\
-$git_status$git_branch \
+$git_status$git_branch\
 $golang$python$rust
 [└ $character](bold green)"""
 
 
 [character]
-success_symbol = "[|](bold green)"
-error_symbol = "[|](bold red)"
+success_symbol = "[𝝺](bold green)"
+error_symbol = "[𝝺](bold red)"
 
 [username]
 format = "$user"
@@ -18,7 +18,7 @@ disabled = false
 show_always = true
 
 [git_branch]
-format = "[$symbol$branch]($style)"
+format = "[$symbol$branch]($style) "
 style = "bold yellow"
 
 [git_status]
