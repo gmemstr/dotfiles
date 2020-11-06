@@ -217,7 +217,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while /home/gsimmer/.config/sway/swaybar.sh; do sleep 1; done
+    status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
 
     colors {
         statusline #ffffff
@@ -225,10 +225,10 @@ bar {
         # inactive_workspace #32323200 #32323200 #5c5c5c
         active_workspace #32323200 #32323200 #5c5c5c
     }
-    font pango:Fira Code 12
+    font pango:IBM Plex Mono 12
 }
 
-font pango:Fira Code 10
+font pango:IBM Plex Mono 10
 default_border pixel 1
 hide_edge_borders smart
 smart_gaps on
