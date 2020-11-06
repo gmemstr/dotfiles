@@ -8,6 +8,7 @@ My setup currently consists of:
 * Wayland for desktop compositing
 * [Sway](https://github.com/swaywm/sway) for window management
   * [i3-gaps](https://github.com/Airblader/i3) when using X11
+  * [picom](https://github.com/yshui/picom) for X11 compositing
 * [Starship](https://starship.rs/) for terminal prompt
 * [Sublime Text 3](https://www.sublimetext.com) for code/text/whatever editing
 * [Monokai Pro](https://monokai.pro) colour scheme where possible
