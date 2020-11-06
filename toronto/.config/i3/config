@@ -206,10 +206,12 @@ bar {
     font pango:$font 12
 }
 
+# Gaps stuff
+for_window [class=".*"] border pixel 0
 smart_gaps on
 smart_borders no_gaps
 hide_edge_borders smart_no_gaps
-gaps inner 2
+gaps inner 10
 
 # Display script
 bindsym $mod+p exec --no-startup-id ~/.config/i3/display.sh

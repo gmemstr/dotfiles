@@ -23,7 +23,14 @@ configuraton
 This repository isn't a "catch all" yet, as I copy over and wrangle various
 configuration files.
 
+## i3
+
+![Desktop screenshot](https://i.imgur.com/v1hBjzY.png)
 
 ## Starship config
 
 [![Starship configuration preview](https://imgur.com/Y1wKQH9.png)](https://imgur.com/Y1wKQH9.png)
+
+## Wallpapers
+
+[cci-bg](https://www.flickr.com/photos/felicianotech/49202146322/in/album-72157676786348813/)
