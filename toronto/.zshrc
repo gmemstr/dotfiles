@@ -39,3 +39,14 @@ SFDX_AC_ZSH_SETUP_PATH=/home/gsimmer/.cache/sfdx/autocomplete/zsh_setup && test 
 
 # Starship init.
 eval "$(starship init zsh)"
+
+# aliases for various Rust-based utils.
+if [ $(which exa) != 'exa not found' ]; then
+   alias ls=exa
+fi
+if [ $(which bat) != 'bat not found' ]; then
+   alias cat=bat
+fi
+if [ $(which rg) != 'rg not found' ]; then
+   alias grep=rg
+fi

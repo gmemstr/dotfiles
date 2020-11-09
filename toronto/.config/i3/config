@@ -218,4 +218,4 @@ bindsym $mod+p exec --no-startup-id ~/.config/i3/display.sh
 
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 
-exec_always --no-startup-id feh --randomize --bg-fill ~/Pictures/cci-bg.png
+exec_always --no-startup-id feh --bg-fill ~/Pictures/cci-bg.png
