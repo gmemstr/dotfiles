@@ -1,7 +1,8 @@
 {
+	"auto_complete_delay": 20,
 	"color_scheme": "Monokai Pro (Filter Spectrum).sublime-color-scheme",
 	"font_face": "IBM Plex Mono",
-	"font_size": 12,
+	"font_size": 13,
 	"ignored_packages":
 	[
 		"LSP-bash",
@@ -15,5 +16,6 @@
 	[
 		80
 	],
+	"scroll_past_end": false,
 	"theme": "Monokai Pro (Filter Spectrum).sublime-theme"
 }

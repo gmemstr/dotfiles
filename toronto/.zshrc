@@ -32,7 +32,7 @@ if [ -f '/usr/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/bin/googl
 export PATH="$PATH:/home/gsimmer/flutter/bin:/home/gsimmer/scripts:/home/gsimmer/apps/goland/bin:/opt/android-sdk:/home/gsimmer/.local/bin"
 export GOPATH="/home/gsimmer/Projects/go"
 export DENO_INSTALL="/home/gsimmer/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+export PATH="$DENO_INSTALL/bin:$GOPATH/bin:$PATH"
 
 # sfdx autocomplete setup
 SFDX_AC_ZSH_SETUP_PATH=/home/gsimmer/.cache/sfdx/autocomplete/zsh_setup && test -f $SFDX_AC_ZSH_SETUP_PATH && source $SFDX_AC_ZSH_SETUP_PATH;

@@ -1,5 +1,6 @@
 {
 	"bootstrapped": true,
+	"debug": true,
 	"in_process_packages":
 	[
 	],
@@ -9,7 +10,10 @@
 		"Dartlight",
 		"Dockerfile Syntax Highlighting",
 		"Emmet",
+		"Emoji",
+		"GitGutter",
 		"Gitmoji",
+		"GoDebug",
 		"Gofmt",
 		"Golang Build",
 		"JSX",
@@ -19,6 +23,7 @@
 		"LSP-yaml",
 		"Markdown Extended",
 		"Markdown Table Formatter",
+		"orgmode",
 		"Package Control",
 		"Rust Enhanced",
 		"SideBarEnhancements",
@@ -27,6 +32,7 @@
 		"Terraform",
 		"Theme - Monokai Pro",
 		"TOML",
+		"TypeScript",
 		"TypeScript Syntax",
 		"Vue Syntax Highlight"
 	]
