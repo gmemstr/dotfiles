@@ -1,0 +1,45 @@
+add_newline = true
+
+format = """
+[┌ $username$hostname](bold green)
+[│](bold green) $directory\
+$git_status$git_branch\
+$golang$python$rust
+[└ $character](bold green)"""
+
+
+[character]
+success_symbol = "[𝝺](bold green)"
+error_symbol = "[𝝺](bold red)"
+
+[username]
+format = "$user"
+disabled = false
+show_always = true
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+style = "bold yellow"
+
+[git_status]
+disabled = false
+
+# configure directory
+[directory]
+truncation_length = 3
+truncate_to_repo = false
+style = "bold italic #87A752"
+
+[hostname]
+ssh_only = false
+format =  "@$hostname"
+disabled = false
+
+[golang]
+format = "[\\(go $version\\)](bold cyan)"
+
+[python]
+format = "[\\(python $version\\)](bold green)"
+
+[rust]
+format = "[\\(rust $version\\)](bold red)"

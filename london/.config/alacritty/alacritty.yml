@@ -1,0 +1,27 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+window:
+  dimensions:
+   columns: 120
+   lines: 35
+
+font:
+  normal:
+    family: "IBM Plex Mono"
+    style: Regular
+
+  size: 12.0
+
+# Attempting to use Monokai Pro palette where possible.
+colors:
+  # Default colors
+  primary:
+    background: '0x212121'
+    foreground: '0xfcfcfa'
+
+cursor:
+  style: Block
+
+  unfocused_hollow: false
+
+# Live config reload (changes require restart)
+live_config_reload: true

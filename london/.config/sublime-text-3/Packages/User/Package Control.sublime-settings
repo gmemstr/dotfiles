@@ -1,0 +1,29 @@
+{
+	"bootstrapped": true,
+	"debug": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Bats",
+		"Dockerfile Syntax Highlighting",
+		"Emmet",
+		"GitGutter",
+		"HexViewer",
+		"JSX",
+		"LSP",
+		"LSP-bash",
+		"LSP-typescript",
+		"LSP-yaml",
+		"Markdown Extended",
+		"Package Control",
+		"Rust Enhanced",
+		"SideBarEnhancements",
+		"SublimeCodeIntel",
+		"Terraform",
+		"Theme - Monokai Pro",
+		"TOML",
+		"TypeScript"
+	]
+}
