@@ -7,33 +7,23 @@
 	"installed_packages":
 	[
 		"Bats",
-		"Dartlight",
 		"Dockerfile Syntax Highlighting",
 		"Emmet",
-		"Emoji",
 		"GitGutter",
-		"Gitmoji",
-		"GoDebug",
-		"Gofmt",
-		"Golang Build",
+		"HexViewer",
 		"JSX",
 		"LSP",
 		"LSP-bash",
 		"LSP-typescript",
 		"LSP-yaml",
 		"Markdown Extended",
-		"Markdown Table Formatter",
-		"orgmode",
 		"Package Control",
 		"Rust Enhanced",
 		"SideBarEnhancements",
 		"SublimeCodeIntel",
-		"Terminus",
 		"Terraform",
 		"Theme - Monokai Pro",
 		"TOML",
-		"TypeScript",
-		"TypeScript Syntax",
-		"Vue Syntax Highlight"
+		"TypeScript"
 	]
 }

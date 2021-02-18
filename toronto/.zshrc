@@ -13,7 +13,7 @@ export ZSH="/home/gsimmer/.oh-my-zsh"
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
-plugins=(git fzf)
+plugins=(git fzf zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 

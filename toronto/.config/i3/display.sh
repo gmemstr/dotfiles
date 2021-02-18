@@ -30,8 +30,8 @@ fi
 if [ `xrandr | grep DP-3 | grep -c ' connected '` -eq 1 ]; then
         EXTERNAL_OUTPUT="DP-3"
 fi
-if [ `xrandr | grep DP2-1 | grep -c ' connected '` -eq 1 ]; then
-        EXTERNAL_OUTPUT="DP2-1"
+if [ `xrandr | grep DP2-3 | grep -c ' connected '` -eq 1 ]; then
+        EXTERNAL_OUTPUT="DP2-3"
 fi
 
 # xrander will run and turn on the display you want, if you have an option for 3 displays, this will need some modifications

@@ -5,9 +5,10 @@
 # Read `man 5 sway` for a complete reference.
 
 ## Outputs
-output eDP-1 pos 1920 0 res 1920x1080
+#output eDP-1 pos 1920 0 res 1920x1080
+output eDP-1 disable
 # output DP-5 transform 90 anticlockwise res 2560x1440@165Hz
-#output DP-4 res 2560x1440@165Hz
+output DP-6 res 2560x1440@165Hz
 
 ### Variables
 #
@@ -64,7 +65,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
-input "1133:49970:Logitech_Gaming_Mouse_G502" {
+input "1133:16511:Logitech_G502" {
   pointer_accel -0.5
   accel_profile flat
 }
