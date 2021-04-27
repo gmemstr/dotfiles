@@ -7,6 +7,8 @@
 	"installed_packages":
 	[
 		"Bats",
+		"COBOL Syntax",
+		"Discord Rich Presence",
 		"Dockerfile Syntax Highlighting",
 		"Emmet",
 		"GitGutter",
@@ -14,6 +16,8 @@
 		"JSX",
 		"LSP",
 		"LSP-bash",
+		"LSP-intelephense",
+		"LSP-pyright",
 		"LSP-typescript",
 		"LSP-yaml",
 		"Markdown Extended",
@@ -21,9 +25,10 @@
 		"Rust Enhanced",
 		"SideBarEnhancements",
 		"SublimeCodeIntel",
+		"Terminus",
 		"Terraform",
 		"Theme - Monokai Pro",
 		"TOML",
-		"TypeScript"
-	]
+		"TypeScript",
+	],
 }

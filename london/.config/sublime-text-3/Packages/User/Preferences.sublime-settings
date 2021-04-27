@@ -6,7 +6,7 @@
 	"ignored_packages":
 	[
 		"Rust",
-		"Vintage"
+		"Vintage",
 	],
 	"monokai_pro_file_icons": true,
 	"monokai_pro_highlight_open_folders": true,
@@ -18,6 +18,8 @@
 	[
 		80
 	],
-	"scroll_past_end": false,
-	"theme": "Monokai Pro (Filter Spectrum).sublime-theme"
+	"theme": "Monokai Pro (Filter Spectrum).sublime-theme",
+	"mini_diff": "auto",
+	"hardware_acceleration": "opengl",
+	"themed_title_bar": true,
 }
