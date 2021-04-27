@@ -18,12 +18,14 @@
 		"LSP-yaml",
 		"Markdown Extended",
 		"Package Control",
+		"PowerShell",
 		"Rust Enhanced",
 		"SideBarEnhancements",
 		"SublimeCodeIntel",
+		"Terminus",
 		"Terraform",
 		"Theme - Monokai Pro",
 		"TOML",
-		"TypeScript"
-	]
+		"TypeScript",
+	],
 }

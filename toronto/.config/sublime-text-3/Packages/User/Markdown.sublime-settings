@@ -1,0 +1,16 @@
+// These settings override both User and Default settings for the Markdown syntax
+{
+    "auto_complete": false,	
+    "ignored_packages": ["Vintage", "Emmet", "SublimeCodeIntel"],
+    "draw_centered": true,
+    "spell_check": true,
+    "tab_completion": false,
+    "auto_complete_triggers": [],
+    "word_wrap": true,
+    "line_numbers": false,
+    "gutter": false,
+    "wrap_width": 80,
+    "word_wrap": true,
+    "scroll_past_end": true
+}
+
