@@ -1,0 +1,9 @@
+[Unit]
+Description=eink Clock Server Daemon
+
+[Service]
+WorkingDirectory=/mnt/wd/Projects/eink-dashboard
+ExecStart=python server/main.py
+
+[Install]
+WantedBy=default.target

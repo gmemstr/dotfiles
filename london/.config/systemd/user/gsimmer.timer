@@ -1,0 +1,11 @@
+[Unit]
+Description=Runs backup script for project directories to Raspberry Pi.
+Requires=backup.service
+
+[Timer]
+Unit=backup.service
+OnBootSec=15min
+OnUnitActive=1w
+
+[Install]
+WantedBy=timers.target

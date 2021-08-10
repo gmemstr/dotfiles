@@ -1,12 +1,11 @@
 {
 	"auto_complete_delay": 20,
 	"color_scheme": "Monokai Pro (Filter Spectrum).sublime-color-scheme",
-	"font_face": "IBM Plex Mono",
+	"font_face": "Iosevka Regular",
 	"font_size": 12,
 	"ignored_packages":
 	[
 		"Rust",
-		"Vintage",
 	],
 	"monokai_pro_file_icons": true,
 	"monokai_pro_highlight_open_folders": true,

@@ -1,31 +1,41 @@
-// Settings in here override those in "LSP/LSP.sublime-settings"
 {
-    "clients": {
-        "pyls": {
-          "command": ["pipenv", "run", "pyls"],
-          "scopes": ["source.python"],
-          "syntaxes": ["Packages/Python/Python.sublime-syntax", "Packages/MagicPython/grammars/MagicPython.tmLanguage", "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage"],
-          "languageId": "python",
-        },
-        "LSP-typescript":
-        {
-			"enabled": false,
-		},
-        "LSP-bash":
-        {
-			"enabled": false,
-		},
-        "LSP-yaml":
-        {
-			"enabled": false,
-		},
-        "LSP-pyright":
-        {
-			"enabled": false,
-		},
-        "LSP-intelephense":
-        {
-			"enabled": false,
-		},
-    },
+   "clients":{
+      "pyls":{
+         "command":[
+            "pipenv",
+            "run",
+            "pyls"
+         ],
+         "scopes":[
+            "source.python"
+         ],
+         "syntaxes":[
+            "Packages/Python/Python.sublime-syntax",
+            "Packages/MagicPython/grammars/MagicPython.tmLanguage",
+            "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage"
+         ],
+         "languageId":"python"
+      },
+      "LSP-typescript":{
+         "enabled":false
+      },
+      "LSP-bash":{
+         "enabled":false
+      },
+      "LSP-yaml":{
+         "enabled":false
+      },
+      "LSP-pyright":{
+         "enabled":true
+      },
+      "LSP-intelephense":{
+         "enabled":true
+      },
+      "clojure-lsp": {
+         "enabled": true,
+         "command": ["java", "-jar", "/home/gsimmer/.local/bin/clojure-lsp.jar"],
+         "selector": "source.clojure",
+         "initializationOptions": {}
+     }
+   }
 }

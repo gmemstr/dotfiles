@@ -1,0 +1,11 @@
+[Unit]
+Description=Backup Service for Projects
+Wants=gsimmer.timer
+
+[Service]
+Type=oneshot
+WorkingDirectory=/mnt/fhg
+ExecStart=bash rclone-pi.sh
+
+[Install]
+WantedBy=default.target
