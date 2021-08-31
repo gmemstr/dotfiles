@@ -10,6 +10,7 @@
 (menu-bar-mode -1)
 
 (set-face-attribute 'default nil :font "IBM Plex Mono" :height 120)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; Packages stuff.
 (require 'package)
@@ -34,6 +35,13 @@
   :config
   (load-theme 'monokai-pro-spectrum t))
 
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :custom
+   (doom-mode-line-height  15))
+(use-package all-the-icons)
+
 (use-package treemacs
   :ensure t
   :defer t
@@ -56,6 +64,17 @@
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 (use-package rust-mode)
+
+;; Can't have lisps without paredit!
+(use-package paredit
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  ;; enable in the *scratch* buffer
+  (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
+  (add-hook 'ielm-mode-hook #'paredit-mode)
+  (add-hook 'lisp-mode-hook #'paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
 
 ;; Ivy/Swiper/Counsel config.
 (use-package swiper)
@@ -83,7 +102,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(rust-mode swipe spinner lsp-treemacs lsp-ivy lsp-ui lsp-mode counsel swiper ivy treemacs use-package monokai-pro-theme)))
+   '(paredit all-the-fonts doom-modeline rust-mode swipe spinner lsp-treemacs lsp-ivy lsp-ui lsp-mode counsel swiper ivy treemacs use-package monokai-pro-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
