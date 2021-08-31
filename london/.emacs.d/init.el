@@ -36,7 +36,7 @@
 (use-package treemacs
   :ensure t
   :defer t
-  :ini
+  :init
   :bind (:map global-map
 	      ("M-0" . treemacs-select-window)
 	      ("C-x t t" . treemacs)))
