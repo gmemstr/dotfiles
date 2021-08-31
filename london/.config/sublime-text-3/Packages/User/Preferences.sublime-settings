@@ -2,7 +2,7 @@
 	"auto_complete_delay": 20,
 	"color_scheme": "Monokai Pro (Filter Spectrum).sublime-color-scheme",
 	"font_face": "Iosevka Regular",
-	"font_size": 12,
+	"font_size": 13,
 	"ignored_packages":
 	[
 		"Rust",
