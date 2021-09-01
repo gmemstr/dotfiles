@@ -40,7 +40,7 @@
   :init (doom-modeline-mode 1)
   :custom
    (doom-mode-line-height  15))
-(use-package all-the-icons)
+(use-package all-the-icons :ensure t)
 
 (use-package treemacs
   :ensure t
@@ -49,10 +49,12 @@
   :bind (:map global-map
 	      ("M-0" . treemacs-select-window)
 	      ("C-x t t" . treemacs)))
-
+(use-package treemacs-projectile
+  :ensure t)
 ;; LSP config.
-(use-package spinner)
+(use-package spinner :ensure t)
 (use-package lsp-mode
+  :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((rust-mode . lsp)
@@ -75,6 +77,16 @@
   (add-hook 'ielm-mode-hook #'paredit-mode)
   (add-hook 'lisp-mode-hook #'paredit-mode)
   (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
+
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+	      ("s-p" . projectile-command-map)
+	      ("C-c p" . projectile-command-map))
+  :config
+  (setq projectile-project-search-path '("~/Projects")))
 
 ;; Ivy/Swiper/Counsel config.
 (use-package swiper)
@@ -102,7 +114,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(paredit all-the-fonts doom-modeline rust-mode swipe spinner lsp-treemacs lsp-ivy lsp-ui lsp-mode counsel swiper ivy treemacs use-package monokai-pro-theme)))
+   '(treemacs-projectile projectile paredit all-the-fonts doom-modeline rust-mode swipe spinner lsp-treemacs lsp-ivy lsp-ui lsp-mode counsel swiper ivy treemacs use-package monokai-pro-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
