@@ -207,6 +207,6 @@ This applies to any random Guix VM I spin up, usually for testing configurations
  (host-name "virtual")
  (bootloader (bootloader-configuration
 	      (bootloader grub-bootloader)
-	      (target "/boot")
+	      (target "/dev/sda")
 	      (keyboard-layout (keyboard-layout "us")))))
 #+end_src

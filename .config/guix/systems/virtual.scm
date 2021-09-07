@@ -7,5 +7,5 @@
  (host-name "virtual")
  (bootloader (bootloader-configuration
 	      (bootloader grub-bootloader)
-	      (target "/boot")
+	      (target "/dev/sda")
 	      (keyboard-layout (keyboard-layout "us")))))
