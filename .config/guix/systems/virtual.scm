@@ -8,4 +8,4 @@
  (bootloader (bootloader-configuration
 	      (bootloader grub-bootloader)
 	      (target "/boot")
-	      (keyboard-layout keyboard-layout))))
+	      (keyboard-layout (keyboard-layout "us")))))

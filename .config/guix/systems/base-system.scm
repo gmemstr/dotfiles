@@ -95,6 +95,7 @@ EndSection
 					"video")))
 		%base-user-accounts))
    (groups (cons (user-group (system? #t) (name "realtime"))
+		 (user-group (system? #t  (name "docker")))
 		 %base-groups))
 
    (packages (append (list
@@ -112,6 +113,7 @@ EndSection
    (services (append (list (service gnome-desktop-service-type)
 			   (set-xorg-configuration
 			    (xorg-configuration
-			     (keyboard-layout keyboard-layout))))
+			     (keyboard-layout keyboard-layout)))
+			   (service docker-service-type))
 		     %desktop-services))
    (name-service-switch %mdns-host-lookup-nss)))

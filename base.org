@@ -138,6 +138,7 @@ in a typing install of Guix/Linux.
 					"video")))
 		%base-user-accounts))
    (groups (cons (user-group (system? #t) (name "realtime"))
+		 (user-group (system? #t  (name "docker")))
 		 %base-groups))
 
    (packages (append (list
@@ -155,7 +156,8 @@ in a typing install of Guix/Linux.
    (services (append (list (service gnome-desktop-service-type)
 			   (set-xorg-configuration
 			    (xorg-configuration
-			     (keyboard-layout keyboard-layout))))
+			     (keyboard-layout keyboard-layout)))
+			   (service docker-service-type))
 		     %desktop-services))
    (name-service-switch %mdns-host-lookup-nss)))
 #+end_src
@@ -207,5 +209,5 @@ This applies to any random Guix VM I spin up, usually for testing configurations
  (bootloader (bootloader-configuration
 	      (bootloader grub-bootloader)
 	      (target "/boot")
-	      (keyboard-layout keyboard-layout))))
+	      (keyboard-layout (keyboard-layout "us")))))
 #+end_src
