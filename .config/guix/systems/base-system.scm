@@ -80,7 +80,7 @@ EndSection
 		  (file-system
 		   (device "/dev/sda2")
 		   (mount-point "/")
-		   (type "ext4")) %base-file-systems)))))
+		   (type "ext4")) %base-file-systems)))
 
    (users (cons (user-account
 		 (name "gsimmer")
@@ -114,4 +114,4 @@ EndSection
 			    (xorg-configuration
 			     (keyboard-layout keyboard-layout))))
 		     %desktop-services))
-   (name-service-switch %mdns-host-lookup-nss)))
+   (name-service-switch %mdns-host-lookup-nss))

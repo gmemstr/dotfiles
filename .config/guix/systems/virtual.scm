@@ -4,4 +4,8 @@
 
 (operating-system
  (inherit base-operating-system)
- (host-name "virtual"))
+ (host-name "virtual")
+ (bootloader (bootloader-configuration
+	      (bootloader grub-bootloader)
+	      (target "/boot")
+	      (keyboard-layout keyboard-layout))))
