@@ -123,14 +123,14 @@ in a typing install of Guix/Linux.
 		  (file-system
 		   (device "/dev/sda2")
 		   (mount-point "/")
-		   (type "ext4"))))
+		   (type "ext4")) %base-file-systems)))))
 
    (users (cons (user-account
 		 (name "gsimmer")
 		 (comment "Gabriel Simmer")
 		 (password (crypt "pass" "$6$abc"))
 		 (group "users")
-		 (supplementary-groups ("wheel" "netdev"
+		 (supplementary-groups '("wheel" "netdev"
 					"audio" "video"
 					"docker" "kvm"
 					"tty" "input"
