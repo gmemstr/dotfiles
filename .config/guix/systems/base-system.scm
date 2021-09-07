@@ -65,7 +65,7 @@ EndSection
    (firmware (list linux-firmware))
    (initrd microcode-initrd)
 
-   (keyboard-layout (keyboard-layout "us"))
+   (keyboard-layout (keyboard-layout "us" "intl"))
 
    (bootloader (bootloader-configuration
 		(bootloader grub-efi-bootloader)
