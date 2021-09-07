@@ -82,7 +82,7 @@ EndSection
 		   (mount-point "/")
 		   (type "ext4"))))
 
-   (users (cons (use-account
+   (users (cons (user-account
 		 (name "gsimmer")
 		 (comment "Gabriel Simmer")
 		 (password (crypt "pass" "$6$abc"))
