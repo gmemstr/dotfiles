@@ -95,7 +95,7 @@ EndSection
 					"video")))
 		%base-user-accounts))
    (groups (cons (user-group (system? #t) (name "realtime"))
-		 (user-group (system? #t  (name "docker")))
+		 (user-group (system? #t) (name "docker"))
 		 %base-groups))
 
    (packages (append (list
