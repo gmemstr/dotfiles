@@ -123,7 +123,7 @@ in a typing install of Guix/Linux.
 		  (file-system
 		   (device "/dev/sda2")
 		   (mount-point "/")
-		   (type "ext4")) %base-file-systems)))
+		   (type "ext4")) %base-file-systems))
 
    (users (cons (user-account
 		 (name "gsimmer")
@@ -157,7 +157,7 @@ in a typing install of Guix/Linux.
 			    (xorg-configuration
 			     (keyboard-layout keyboard-layout))))
 		     %desktop-services))
-   (name-service-switch %mdns-host-lookup-nss))
+   (name-service-switch %mdns-host-lookup-nss)))
 #+end_src
 
 ** Individual Systems
