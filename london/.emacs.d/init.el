@@ -11,6 +11,9 @@
 
 (set-face-attribute 'default nil :font "IBM Plex Mono" :height 120)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(setq org-edit-src-content-indentation 0
+      org-src-tab-acts-natively t
+      org-src-preserve-indentation t)
 
 ;; Packages stuff.
 (require 'package)
