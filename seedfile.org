@@ -1,7 +1,163 @@
-#+title: Base Guix Configuration
-#+author: Gabriel Simmer
+* What is this?
 
-* Channels
+Welcome to the seedfile! This file contains all the code required to generate (so far) the
+following:
+
++ Multi-device emacs configuration (WIP).
++ Base Guix configuration and per device configuration.
+
+Other things may be added later. In the meantime, enjoy the tangle!
+
+* Emacs Configuration
+
+Starting in 2021, I've moved what I would use Sublime Text for over to Emacs. As such, I need a
+relatively usable configuration. Attempts to use DOOMEmacs/spacemacs mostly led to frustration
+as I didn't learn the underlying editor.
+
+** The Basics & UI Tweaks
+
+Some of the basics include turning off some of the defaults for a more focused experience, akin
+to what you'd expect from ST.
+
+#+begin_src elisp :tangle .config/emacs.d/init.el
+(setq inhibit-startup-message  t)
+
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(set-fringe-mode 10)
+
+(menu-bar-mode -1)
+
+(set-face-attribute 'default nil :font "IBM Plex Mono" :height 120)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(setq org-edit-src-content-indentation 0
+      org-src-tab-acts-natively t
+      org-src-preserve-indentation t)
+#+end_src
+
+** Packages
+
+Next is a relatively lengthy packages block. There's a few key elements here,
+including my theme of choice (Monokai Pro) and the setup of several useful
+UI/UX elements such as treemacs, LSP mode, ivy and projectile, among others.
+Eventually this will be split into its own file.
+
+#+begin_src elisp :tangle .config/emacs.d/init.el
+;; Packages stuff.
+(require 'package)
+
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+			 ("org" . "https://orgmode.org/elpa/")
+			 ("elpa" . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+;; I like Monokai Pro, sue me ;)
+(use-package monokai-pro-theme
+  :ensure t
+  :config
+  (load-theme 'monokai-pro-spectrum t))
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :custom
+   (doom-mode-line-height  15))
+(use-package all-the-icons :ensure t)
+
+(use-package treemacs
+  :ensure t
+  :defer t
+  :init
+  :bind (:map global-map
+	      ("M-0" . treemacs-select-window)
+	      ("C-x t t" . treemacs)))
+(use-package treemacs-projectile
+  :ensure t)
+;; LSP config.
+(use-package spinner :ensure t)
+(use-package lsp-mode
+  :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook ((rust-mode . lsp)
+	 (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+(use-package rust-mode)
+
+;; Can't have lisps without paredit!
+(use-package paredit
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  ;; enable in the *scratch* buffer
+  (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
+  (add-hook 'ielm-mode-hook #'paredit-mode)
+  (add-hook 'lisp-mode-hook #'paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
+
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+	      ("s-p" . projectile-command-map)
+	      ("C-c p" . projectile-command-map))
+  :config
+  (setq projectile-project-search-path '("~/Projects")))
+
+;; Ivy/Swiper/Counsel config.
+(use-package swiper)
+(use-package counsel)
+(use-package ivy
+  :diminish
+  :bind (("C-s" . swiper)
+	 :map ivy-minibuffer-map
+	 ("TAB" . ivy-alt-done)
+	 ("C-l" . ivy-alt-done)
+	 ("C-j" . ivy-next-line)
+	 ("C-k" . ivy-previous-line)
+	 :map ivy-switch-buffer-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-l" . ivy-done)
+	 ("C-d" . ivy-switch-buffer-kill)
+	 :map ivy-reverse-i-search-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-d" . ivy-reverse-i-search-kill))
+  :config
+  (ivy-mode 1))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(treemacs-projectile projectile paredit all-the-fonts doom-modeline rust-mode swipe spinner lsp-treemacs lsp-ivy lsp-ui lsp-mode counsel swiper ivy treemacs use-package monokai-pro-theme)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+#+end_src
+
+* Guix Configuration
+  
+** Channels
 
 I don't really need any fancy channels, besides nonguix and my own repository.
   
@@ -23,9 +179,9 @@ I don't really need any fancy channels, besides nonguix and my own repository.
 	  "BBB0 2DDF 2CEA F6A8 0D1D  E643 A2A0 6DF2 A33A 54FA")))))
 #+end_src
 
-* Systems
+** Systems
 
-** Base Configuration
+*** Base Configuration
 
 Just some basic importing of modules for now. I'm using the nonfree Linux kernel
 from nonguix.
@@ -65,10 +221,6 @@ from nonguix.
 (use-service-modules desktop xorg)
 (use-package-modules certs)
 (use-package-modules shells)
-#+end_src
-
-
-#+begin_src scheme :tangle .config/guix/systems/base-system.scm
 
 (define %xorg-libinput-config
   "Section \"InputClass\"
@@ -161,9 +313,9 @@ in a typing install of Guix/Linux.
    (name-service-switch %mdns-host-lookup-nss)))
 #+end_src
 
-** Individual Systems
+*** Individual Systems
 
-*** London
+**** London
 
 London is my primary custom built desktop, with
 
@@ -190,10 +342,18 @@ London is my primary custom built desktop, with
 		 (device "/dev/nvme0n1p2")
 		 (mount-point "/")
 		 (type "ext4"))
+		(file-system
+		 (device "/dev/sda1")
+		 (mount-point "/home/gsimmer/wd")
+		 (type "ext4"))
+		(file-system
+		 (device "/dev/sdb1")
+		 (mount-point "/home/gsimmer/fhg")
+		 (type "ext4"))
 		%base-file-systems)))
 #+end_src
 
-*** Virtual
+**** Virtual
 
 This applies to any random Guix VM I spin up, usually for testing configurations.
 

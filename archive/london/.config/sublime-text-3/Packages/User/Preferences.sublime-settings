@@ -6,6 +6,7 @@
 	"ignored_packages":
 	[
 		"Rust",
+		"Vintage"
 	],
 	"monokai_pro_file_icons": true,
 	"monokai_pro_highlight_open_folders": true,
