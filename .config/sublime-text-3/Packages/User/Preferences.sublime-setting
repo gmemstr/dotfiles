@@ -1,0 +1,25 @@
+{
+	"auto_complete_delay": 20,
+	"color_scheme": "Monokai Pro (Filter Spectrum).sublime-color-scheme",
+	"font_face": "Iosevka Regular",
+	"font_size": 13,
+	"ignored_packages":
+	[
+		"Rust",
+		"Vintage"
+	],
+	"monokai_pro_file_icons": true,
+	"monokai_pro_highlight_open_folders": true,
+	"monokai_pro_minimal": true,
+	"monokai_pro_sidebar_headings": true,
+	"monokai_pro_style_title_bar": true,
+	"monokai_pro_ui_font_face": "IBM Plex Mono",
+	"rulers":
+	[
+		80
+	],
+	"theme": "Monokai Pro (Filter Spectrum).sublime-theme",
+	"mini_diff": "auto",
+	"hardware_acceleration": "opengl",
+	"themed_title_bar": true,
+}

@@ -1,0 +1,32 @@
+{
+	"bootstrapped": true,
+	"debug": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Dockerfile Syntax Highlighting",
+		"Emmet",
+		"GitGutter",
+		"Gofmt",
+		"Golang Build",
+		"HexViewer",
+		"LSP",
+		"LSP-bash",
+		"LSP-intelephense",
+		"LSP-pyright",
+		"LSP-SourceKit",
+		"LSP-typescript",
+		"LSP-yaml",
+		"Package Control",
+		"paredit",
+		"Rust Enhanced",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"Swift",
+		"Theme - Monokai Pro",
+		"TOML",
+		"TypeScript",
+	],
+}
