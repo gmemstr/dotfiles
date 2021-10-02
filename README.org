@@ -1,0 +1,10 @@
+#+title: Gabriel's Dotfiles
+
+Enjoy!
+
+Dotfiles themselves (that live in .config or my home dir) are generated from
+=Dots.org=. This includes things like zsh, emacs, and wezterm. I use =stow=
+to link these in my home directory.
+
+System configuration (NixOS specifically) comes from =Systems.org=. So far
+only my desktop lives there, since I have yet to install things elsewhere.
