@@ -1,0 +1,421 @@
+* Dotfiles
+
+#+PROPERTY: header-args :mkdirp yes
+  
+/now do it with orgmode!/
+
+original old configs are in =archive/=.
+
+** Table of Contents
+
+:properties:
+:toc: :include all :ignore this
+:end:
+:contents:
+- [[#my-setup][My Setup]]
+  - [[#zsh][zsh]]
+  - [[#wezterm][WezTerm]]
+  - [[#systemd-units][Systemd Units]]
+  - [[#sublime-text][Sublime Text]]
+  - [[#emacs][emacs]]
+:end:
+   
+** My Setup
+
+   ...is a little in flux.
+
+   Over the past several months, I've been investing time into [[https://blog.gabrielsimmer.com/posts/emacs-induction/][learning emacs]], replacing
+   Sublime in my workflow. As a part of this I've also considered using Guix (see: =seedfile.org=),
+   but am not quite there in my journey, so they aren't included here.
+
+*** zsh
+
+    zsh is my choice of shell, with some written-in-Rust replacements for
+    a few CLI tools.
+
+    =.zshrc=
+
+#+begin_src shell :tangle .zshrc
+export ZSH="/home/gsimmer/.oh-my-zsh"
+
+ZSH_THEME="frisk"
+
+plugins=(git fzf zsh-autosuggestions)
+
+source $ZSH/oh-my-zsh.sh
+
+export GOPATH="/home/gsimmer/Projects/go"
+export CARGOPATH="/home/gsimmer/.cargo/bin"
+export PATH="/home/gsimmer/.local/bin:$GOPATH/bin:$CARGOPATH:$PATH"
+
+# Starship init.
+#eval "$(starship init zsh)"
+
+# aliases for various Rust-based utils.
+if [ $(which exa) != 'exa not found' ]; then
+   alias ls=exa
+fi
+if [ $(which bat) != 'bat not found' ]; then
+   alias cat=bat
+fi
+if [ $(which rg) != 'rg not found' ]; then
+   alias grep=rg
+fi
+#+end_src
+   
+*** wezterm
+
+    WezTerm is my terminal of choice these days, and is configured with Lua.
+    Most of the tweaks from the default config are around using Monokai Pro
+    colours.
+
+    =.config/wezterm/wezterm.lua=
+    
+#+begin_src lua :tangle .config/wezterm/wezterm.lua
+local wezterm = require 'wezterm';
+
+return {
+  automatically_reload_config = true,
+  font = wezterm.font("IBM Plex Mono"),
+  window_close_confirmation = "NeverPrompt",
+  font_size = 12,
+  initial_cols = 120,
+  initial_rows = 35,
+  colors = {
+      foreground = "#f7f1ff",
+      background = "#222222",
+      cursor_bg = "#8b888f",
+      cursor_fg = "#f7f1ff",
+      cursor_border = "#8b888f",
+      selection_fg = "#363537",
+      selection_bg = "#69676c",
+      scrollbar_thumb = "#222222",
+      split = "#fce566",
+      tab_bar = {
+      background = "#222222",
+      active_tab = {
+        bg_color = "#f7f1ff",
+        fg_color = "#69676c",
+        intensity = "Normal",
+        underline = "None",
+        italic = false,
+        strikethrough = false,
+      },
+
+      inactive_tab = {
+        bg_color = "#69676c",
+        fg_color = "#f7f1ff",
+
+      },
+
+      inactive_tab_hover = {
+        bg_color = "#69676c",
+        fg_color = "#f7f1ff",
+        italic = true,
+      }
+    }
+  }
+}
+#+end_src
+
+*** systemd units
+
+    When I move to Guix I expect I'll need to port these to Herd, but in the meantime...
+
+**** clock
+
+     This runs a small webserver that renders a date that is fetched and displayed
+     on a Raspberry Pi with a small eink display.
+
+     You can read more about it [[https://dev.to/gmemstr/tiny-eink-dashboard-29a4][here]].
+
+     =.config/systemd/user/clock.service=
+
+#+begin_src :tangle .config/systemd/user/clock.service
+[Unit]
+Description=eink Clock Server Daemon
+
+[Service]
+WorkingDirectory=/mnt/wd/Projects/eink-dashboard
+ExecStart=python server/main.py
+
+[Install]
+WantedBy=default.target
+#+end_src
+
+**** backup
+
+     This runs the rclone command to back up my large data SSD to my NAS. Coupled with
+     a timer.
+
+     =.config/systemd/user/backup.service=
+#+begin_src :tangle .config/systemd/user/backup.service
+[Unit]
+Description=Backup Service for Projects
+Wants=gsimmer.timer
+
+[Service]
+Type=oneshot
+WorkingDirectory=/mnt/fhg
+ExecStart=bash rclone-pi.sh
+
+[Install]
+WantedBy=default.target
+#+end_src
+
+    =.config/systemd/user/gsimmer.timer=
+
+#+begin_src :tangle .config/systemd/user/gsimmer.timer
+[Unit]
+Description=Runs backup script for project directories to Raspberry Pi.
+Requires=backup.service
+
+[Timer]
+Unit=backup.service
+OnBootSec=15min
+OnUnitActive=1w
+
+[Install]
+WantedBy=timers.target
+#+end_src
+
+*** emacs
+
+    Ah, the star of the show! I'm still working on this configuration,
+    and plan to split it into seperate files for each package. In the
+    meantime, enjoy the monolith.
+
+    =..emacs.d/init.el=
+    
+#+begin_src elisp :tangle .emacs.d/init.el
+;; Mostly following along with System Crafter's videos.
+;; So this will look pretty familiar.
+(setq inhibit-startup-message  t)
+
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(set-fringe-mode 10)
+
+(menu-bar-mode -1)
+
+;; disable auto-save and auto-backup
+(setq auto-save-default nil)
+(setq make-backup-files nil)
+
+(set-face-attribute 'default nil :font "IBM Plex Mono" :height 120)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(setq org-edit-src-content-indentation 0
+      org-src-tab-acts-natively t
+      org-src-preserve-indentation t)
+
+;; Packages stuff.
+(require 'package)
+
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+			 ("org" . "https://orgmode.org/elpa/")
+			 ("elpa" . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+;; I like Monokai Pro, sue me ;)
+(use-package monokai-pro-theme
+  :ensure t
+  :config
+  (load-theme 'monokai-pro-spectrum t))
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :custom
+   (doom-mode-line-height  15))
+(use-package all-the-icons :ensure t)
+
+(use-package treemacs
+  :ensure t
+  :defer t
+  :init
+  :bind (:map global-map
+	      ("M-0" . treemacs-select-window)
+	      ("C-x t t" . treemacs)))
+(use-package treemacs-projectile
+  :ensure t)
+;; LSP config.
+(use-package spinner :ensure t)
+(use-package lsp-mode
+  :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook ((rust-mode . lsp)
+	 (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+(use-package rust-mode)
+
+;; Can't have lisps without paredit!
+(use-package paredit
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  ;; enable in the *scratch* buffer
+  (add-hook 'lisp-interaction-mode-hook #'paredit-mode)
+  (add-hook 'ielm-mode-hook #'paredit-mode)
+  (add-hook 'lisp-mode-hook #'paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode))
+
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+	      ("s-p" . projectile-command-map)
+	      ("C-c p" . projectile-command-map))
+  :config
+  (setq projectile-project-search-path '("~/Projects")))
+
+;; Ivy/Swiper/Counsel config.
+(use-package swiper)
+(use-package counsel)
+(use-package ivy
+  :diminish
+  :bind (("C-s" . swiper)
+	 :map ivy-minibuffer-map
+	 ("TAB" . ivy-alt-done)
+	 ("C-l" . ivy-alt-done)
+	 ("C-j" . ivy-next-line)
+	 ("C-k" . ivy-previous-line)
+	 :map ivy-switch-buffer-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-l" . ivy-done)
+	 ("C-d" . ivy-switch-buffer-kill)
+	 :map ivy-reverse-i-search-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-d" . ivy-reverse-i-search-kill))
+  :config
+  (ivy-mode 1))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(treemacs-projectile projectile paredit all-the-fonts doom-modeline rust-mode swipe spinner lsp-treemacs lsp-ivy lsp-ui lsp-mode counsel swiper ivy treemacs use-package monokai-pro-theme)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+#+end_src
+
+*** sublime text
+
+    Although I've moved to emacs for what I would use Sublime for, I still
+    keep this configuration around for quick setup in the case I need it
+    (e.g a virtual machine).
+
+    Most of these settings are for Monokai Pro.
+
+    =.config/sublime-text-3/Packages/User/Preferences.sublime-settings=
+
+#+begin_src json :tangle .config/sublime-text-3/Packages/User/Preferences.sublime-setting
+{
+	"auto_complete_delay": 20,
+	"color_scheme": "Monokai Pro (Filter Spectrum).sublime-color-scheme",
+	"font_face": "Iosevka Regular",
+	"font_size": 13,
+	"ignored_packages":
+	[
+		"Rust",
+		"Vintage"
+	],
+	"monokai_pro_file_icons": true,
+	"monokai_pro_highlight_open_folders": true,
+	"monokai_pro_minimal": true,
+	"monokai_pro_sidebar_headings": true,
+	"monokai_pro_style_title_bar": true,
+	"monokai_pro_ui_font_face": "IBM Plex Mono",
+	"rulers":
+	[
+		80
+	],
+	"theme": "Monokai Pro (Filter Spectrum).sublime-theme",
+	"mini_diff": "auto",
+	"hardware_acceleration": "opengl",
+	"themed_title_bar": true,
+}
+#+end_src
+
+    I also keep a Package Control file to auto install stuff.
+
+    =.config/sublime-text-3/Packages/User/Package Control.sublime-settings=
+    
+#+begin_src json :tangle .config/sublime-text-3/Packages/User/Package Control.sublime-settings
+{
+	"bootstrapped": true,
+	"debug": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Dockerfile Syntax Highlighting",
+		"Emmet",
+		"GitGutter",
+		"Gofmt",
+		"Golang Build",
+		"HexViewer",
+		"LSP",
+		"LSP-bash",
+		"LSP-intelephense",
+		"LSP-pyright",
+		"LSP-SourceKit",
+		"LSP-typescript",
+		"LSP-yaml",
+		"Package Control",
+		"paredit",
+		"Rust Enhanced",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"Swift",
+		"Theme - Monokai Pro",
+		"TOML",
+		"TypeScript",
+	],
+}
+#+end_src
+
+    And a Markdown specific configuration to bring the distraction-free
+    mode to the default windowed view.
+
+    =.config/sublime-text-3/Packages/User/Markdown.sublime-settings=
+
+#+begin_src json :tangle .config/sublime-text-3/Packages/User/Markdown.sublime-settings
+{
+    "auto_complete": false,	
+    "ignored_packages": ["Vintage", "Emmet", "SublimeCodeIntel"],
+    "draw_centered": true,
+    "spell_check": true,
+    "tab_completion": false,
+    "auto_complete_triggers": [],
+    "word_wrap": true,
+    "line_numbers": false,
+    "gutter": false,
+    "wrap_width": 80,
+    "word_wrap": true,
+    "scroll_past_end": true
+}
+#+end_src
+

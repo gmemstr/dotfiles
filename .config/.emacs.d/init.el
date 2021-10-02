@@ -70,6 +70,9 @@
 
 (use-package rust-mode)
 
+(use-package nix-mode
+  :mode "\\.nix\\'")
+
 ;; Can't have lisps without paredit!
 (use-package paredit
   :ensure t
