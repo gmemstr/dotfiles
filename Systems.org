@@ -40,14 +40,23 @@ this is pretty close to the default configuration.
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # Required for Steam to work properly.
-  hardware.opengl.driSupport32Bit = true;
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+    setLdLibraryPath = true;
+    driSupport32Bit = true;
+  };
+  # Required for Proton games to function.
+  programs.steam.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   
-
   # Configure keymap in X11
   services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
