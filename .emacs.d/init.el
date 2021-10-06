@@ -36,11 +36,10 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; I like Monokai Pro, sue me ;)
-(use-package monokai-pro-theme
+(use-package nano-theme
   :ensure t
   :config
-  (load-theme 'monokai-pro-spectrum t))
+  (load-theme 'nano-dark t))
 
 (use-package doom-modeline
   :ensure t
