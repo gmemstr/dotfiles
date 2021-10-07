@@ -262,6 +262,7 @@ WantedBy=timers.target
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 (use-package rust-mode)
+(use-package json-mode)
 
 ;; Can't have lisps without paredit!
 (use-package paredit

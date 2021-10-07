@@ -87,10 +87,10 @@ this is pretty close to the default configuration.
     firefox
     emacs
     curl
-    flatpak
     podman
     tailscale
   ];
+  services.flatpak.enable = true;
 
   programs.mtr.enable = true;
   programs.gnupg.agent = {
