@@ -177,6 +177,16 @@ the NixOS to seperate out the specific-to-my-current-hardware configuration.
    I have two Raspberry Pis - a 3B+ ("watcher"), and a 4 ("panda"). Watcher
    serves as a watchdog for my self hosted services, usually living on Panda.
 
+*** The Installer Image
+
+    Very minimal changes required here, only really need to enabled the SSH daemon
+    and add my key so I can push the actual configuration.
+
+    I might investigate bundling the "real" configurations into the live installer
+    image, so I have to run fewer commands.
+
+    [[https://nixos.wiki/wiki/NixOS_on_ARM#Getting_the_installer][More info on the NixOS Wiki]]
+   
 #+begin_src nix :tangle nix/image-configuration.nix
 { ... }: {
   imports = [
@@ -201,10 +211,10 @@ the NixOS to seperate out the specific-to-my-current-hardware configuration.
    Watcher is my Raspberry Pi 3B+ responsible for monitoring various
    services and devices on my network (and generally the wider web).
    It uses [[https://github.com/gmemstr/platypus][Platypus]] (my custom monitoring platform) for this, along
-   with some cron jobs.
+   with some cron jobs to curl the services themselves.
 
-   Watcher requires a few things; it monitors my various self-hosted
-   services, and reports these to a self hosted Platypus instance.
+   Actually declaractive install of Platypus is TODO, once I have the
+   next release tagged.
    
 #+begin_src nix :tangle nix/watcher-configuration.nix
 { config, pkgs, lib, ... }: {
@@ -259,6 +269,9 @@ the NixOS to seperate out the specific-to-my-current-hardware configuration.
 
    Panda is a general-purpose Raspberry Pi 4, responsible for hosting
    some network shares and my password manager (using [[https://github.com/dani-garcia/vaultwarden][Vaultwarden]]).
+
+   Largely TODO, this currently runs Raspbian until I'm happy with my
+   testbed.
 
 #+begin_src nix :tangle nix/panda-configuration.nix
 { ... }: {
