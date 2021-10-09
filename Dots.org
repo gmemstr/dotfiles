@@ -254,6 +254,7 @@ WantedBy=timers.target
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((rust-mode . lsp)
+	 (go-mode . lsip)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 
@@ -262,6 +263,16 @@ WantedBy=timers.target
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 (use-package rust-mode)
+(use-package go-mode)
+(add-hook 'go-mode-hook #'lsp-deferred)
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
 (use-package json-mode)
 
 ;; Can't have lisps without paredit!

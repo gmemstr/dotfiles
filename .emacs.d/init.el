@@ -64,6 +64,7 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((rust-mode . lsp)
+	 (go-mode . lsip)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 
@@ -72,6 +73,17 @@
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 (use-package rust-mode)
+(use-package go-mode)
+(add-hook 'go-mode-hook #'lsp-deferred)
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+(use-package json-mode)
 
 ;; Can't have lisps without paredit!
 (use-package paredit
@@ -120,7 +132,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(json-mode treemacs-projectile projectile paredit all-the-fonts doom-modeline rust-mode swipe spinner lsp-treemacs lsp-ivy lsp-ui lsp-mode counsel swiper ivy treemacs use-package monokai-pro-theme)))
+   '(treemacs-projectile projectile paredit all-the-fonts doom-modeline rust-mode swipe spinner lsp-treemacs lsp-ivy lsp-ui lsp-mode counsel swiper ivy treemacs use-package monokai-pro-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
