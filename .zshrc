@@ -8,7 +8,7 @@ source $ZSH/oh-my-zsh.sh
 
 export GOPATH="/home/gsimmer/projects/go"
 export CARGOPATH="/home/gsimmer/.cargo/bin"
-export PATH="/usr/local/go/bin:/home/gsimmer/.local/bin:$GOPATH/bin:$CARGOPATH:$PATH"
+export PATH="/home/gsimmer/.local/bin:$GOPATH/bin:$CARGOPATH:$PATH"
 
 # Starship init.
 #eval "$(starship init zsh)"

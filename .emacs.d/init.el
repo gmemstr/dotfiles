@@ -14,8 +14,8 @@
       org-src-preserve-indentation t)
 
 ;; stupid hacks
-(setenv "PATH"
-	(concat "/usr/local/bin/go" "/home/gsimmer/projects/go/bin" (getenv "PATH")))
+(global-set-key (kbd "C-c y") 'clipboard-yank)
+(global-set-key (kbd "C-c x") 'kill-ring-save)
 
 ;; straight.el bootstrapping
 (defvar bootstrap-version)
@@ -63,9 +63,19 @@
 	      ("C-c p" . projectile-command-map)))
 (use-package dired-sidebar :straight t :commands (dired-sidebar-toggle-sidebar))
 
+;; I hate that I need this, but WSL is /special/.
+(when (and (eq system-type 'gnu/linux)
+           (getenv "WSLENV"))
+  (use-package exec-path-from-shell :straight t)
+  (exec-path-from-shell-initialize)
+)
+
 ;; lsp-mode stuff
 (use-package eglot :straight t
 	     :config (add-hook 'go-mode-hook 'eglot-ensure))
 (use-package company :straight t
-  :config (add-hook 'after-init-hook 'global-company-mode) (setq company-idle-delay 0) (setq company-minimum-prefix-length 1))
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
 (use-package go-mode :straight t)

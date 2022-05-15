@@ -44,7 +44,7 @@ plugins=(git fzf zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
-export GOPATH="/home/gsimmer/Projects/go"
+export GOPATH="/home/gsimmer/projects/go"
 export CARGOPATH="/home/gsimmer/.cargo/bin"
 export PATH="/home/gsimmer/.local/bin:$GOPATH/bin:$CARGOPATH:$PATH"
 
@@ -61,6 +61,13 @@ fi
 if [ $(which rg) != 'rg not found' ]; then
    alias grep=rg
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export FLYCTL_INSTALL="/home/gsimmer/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
 #+end_src
    
 *** wezterm
@@ -204,8 +211,8 @@ WantedBy=timers.target
       org-src-preserve-indentation t)
 
 ;; stupid hacks
-(setenv "PATH"
-	(concat "/usr/local/bin/go" "/home/gsimmer/projects/go/bin" (getenv "PATH")))
+(global-set-key (kbd "C-c y") 'clipboard-yank)
+(global-set-key (kbd "C-c x") 'kill-ring-save)
 
 ;; straight.el bootstrapping
 (defvar bootstrap-version)
@@ -253,11 +260,21 @@ WantedBy=timers.target
 	      ("C-c p" . projectile-command-map)))
 (use-package dired-sidebar :straight t :commands (dired-sidebar-toggle-sidebar))
 
+;; I hate that I need this, but WSL is /special/.
+(when (and (eq system-type 'gnu/linux)
+           (getenv "WSLENV"))
+  (use-package exec-path-from-shell :straight t)
+  (exec-path-from-shell-initialize)
+)
+
 ;; lsp-mode stuff
 (use-package eglot :straight t
 	     :config (add-hook 'go-mode-hook 'eglot-ensure))
 (use-package company :straight t
-  :config (add-hook 'after-init-hook 'global-company-mode) (setq company-idle-delay 0) (setq company-minimum-prefix-length 1))
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
 (use-package go-mode :straight t)
 #+end_src
 
