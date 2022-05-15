@@ -258,7 +258,19 @@ WantedBy=timers.target
   :bind (:map projectile-mode-map
 	      ("s-p" . projectile-command-map)
 	      ("C-c p" . projectile-command-map)))
-(use-package dired-sidebar :straight t :commands (dired-sidebar-toggle-sidebar))
+
+(use-package treemacs
+  :straight t
+  :init (with-eval-after-load 'winum
+	  (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  :bind
+  (:map global-map
+	("M-0" . treemacs-select-window)
+	("C-x t t" . treemacs)
+	("C-x t C-t" . treemacs-find-file)))
+(use-package treemacs-projectile
+  :straight t
+  :after (treemacs projectile))
 
 ;; I hate that I need this, but WSL is /special/.
 (when (and (eq system-type 'gnu/linux)
