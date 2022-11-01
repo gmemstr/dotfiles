@@ -13,6 +13,8 @@
       org-src-tab-acts-natively t
       org-src-preserve-indentation t)
 
+(setq-default tab-width 4)
+
 ;; stupid hacks
 (global-set-key (kbd "C-c y") 'clipboard-yank)
 (global-set-key (kbd "C-c x") 'kill-ring-save)
@@ -57,10 +59,12 @@
 (use-package projectile
   :straight t
   :init (projectile-mode +1)
-  :config (setq projectile-project-search-path '("~/projects"))
+  :config (setq projectile-project-search-path '("~/Projects"))
   :bind (:map projectile-mode-map
 	      ("s-p" . projectile-command-map)
 	      ("C-c p" . projectile-command-map)))
+
+(use-package magit :straight t)
 
 (use-package treemacs
   :straight t
@@ -79,8 +83,27 @@
 (when (and (eq system-type 'gnu/linux)
            (getenv "WSLENV"))
   (use-package exec-path-from-shell :straight t)
-  (exec-path-from-shell-initialize)
-)
+  (exec-path-from-shell-initialize))
+
+;; Direnv integration
+(use-package direnv :straight t)
+(direnv-mode)
+
+;; Fancy tabs
+(use-package centaur-tabs :straight t
+  :config
+     (setq centaur-tabs-style "bar"
+	  centaur-tabs-height 32
+	  centaur-tabs-set-icons t
+	  centaur-tabs-set-modified-marker t
+	  centaur-tabs-show-navigation-buttons t
+	  centaur-tabs-set-bar 'under
+	  x-underline-at-descent-line t)
+     (centaur-tabs-headline-match)
+     (setq uniquify-separator "/")
+     (setq uniquify-buffer-name-style 'forward)
+  :bind ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
 
 ;; lsp-mode stuff
 (use-package eglot :straight t
@@ -93,6 +116,8 @@
 (use-package go-mode :straight t)
 (use-package nix-mode :straight t
   :mode "\\.nix\\'")
+(use-package yaml-mode :straight t)
+(use-package terraform-mode :straight t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
