@@ -3,7 +3,7 @@
 (setq auto-save-default nil)
 (setq make-backup-files nil)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(set-face-attribute 'default nil :font "IBM Plex Mono" :height 120)
+(set-face-attribute 'default nil :font "Jetbrains Mono" :height 120)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (set-fringe-mode 10)
