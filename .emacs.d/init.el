@@ -118,6 +118,16 @@
   :mode "\\.nix\\'")
 (use-package yaml-mode :straight t)
 (use-package terraform-mode :straight t)
+(use-package yasnippet :straight t)
+(yas-global-mode 1)
+(use-package k8s-mode
+  :straight t
+  :config
+  (setq k8s-search-documentation-browser-function 'browse-url-firefox)
+  :hook (k8s-mode . yas-minor-mode))
+(use-package kubernetes :straight t)
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
