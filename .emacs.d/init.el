@@ -2,17 +2,20 @@
 ;; neccesary non-package related config
 (setq auto-save-default nil)
 (setq make-backup-files nil)
+(cond ((find-font (font-spec :name "Jetbrains Mono"))
+	   (set-face-attribute 'default nil :font "Jetbrains Mono" :height 120)))
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(set-face-attribute 'default nil :font "Jetbrains Mono" :height 120)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (set-fringe-mode 10)
+(setq column-number-mode t)
 (menu-bar-mode -1)
+;; For Emacs 29.
+;; (pixel-scroll-precision-mode t)
 
 (setq org-edit-src-content-indentation 0
       org-src-tab-acts-natively t
       org-src-preserve-indentation t)
-
 (setq-default tab-width 4)
 
 ;; stupid hacks
@@ -131,46 +134,15 @@
 (use-package rust-mode :straight t)
 
 (use-package olivetti :straight t)
-(defun me/org-mode ()
-  "My custom configuration for 'org-mode'."
-  (olivetti-mode)
-  (olivetti-set-width 80)
-  )
-(add-hook 'org-mode-hook 'me/org-mode)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(nano))
- '(custom-safe-themes
-   '("fb83a50c80de36f23aea5919e50e1bccd565ca5bb646af95729dc8c5f926cbf3" "e7820b899036ae7e966dcaaec29fd6b87aef253748b7de09e74fdc54407a7a02" "1781e8bccbd8869472c09b744899ff4174d23e4f7517b8a6c721100288311fa5" default))
- '(safe-local-variable-values
-   '((eval modify-syntax-entry 43 "'")
-	 (eval modify-syntax-entry 36 "'")
-	 (eval modify-syntax-entry 126 "'")
-	 (eval let
-		   ((root-dir-unexpanded
-			 (locate-dominating-file default-directory ".dir-locals.el")))
-		   (when root-dir-unexpanded
-			 (let*
-				 ((root-dir
-				   (expand-file-name root-dir-unexpanded))
-				  (root-dir*
-				   (directory-file-name root-dir)))
-			   (unless
-				   (boundp 'geiser-guile-load-path)
-				 (defvar geiser-guile-load-path 'nil))
-			   (make-local-variable 'geiser-guile-load-path)
-			   (require 'cl-lib)
-			   (cl-pushnew root-dir* geiser-guile-load-path :test #'string-equal))))
-	 (eval setq-local guix-directory
-		   (locate-dominating-file default-directory ".dir-locals.el"))))
- '(warning-suppress-log-types '((comp))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; Adapted from https://github.com/Slackwise/dotfiles/blob/master/emacs/slackwise.el
+(setq-default
+  functions-file (concat (or (getenv "XDG_CONFIG_HOME") "~/.emacs.d/") "functions.el"))
+(when (file-exists-p functions-file)
+  (load custom-file))
+
+;; Keep the customize system from borking up this file.
+(setq-default
+  custom-file (concat (or (getenv "XDG_CONFIG_HOME") "~/.emacs.d/") "custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file))
