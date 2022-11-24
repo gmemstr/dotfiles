@@ -139,7 +139,7 @@
 (setq-default
   functions-file (concat (or (getenv "XDG_CONFIG_HOME") "~/.emacs.d/") "functions.el"))
 (when (file-exists-p functions-file)
-  (load custom-file))
+  (load functions-file))
 
 ;; Keep the customize system from borking up this file.
 (setq-default
