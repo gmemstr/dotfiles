@@ -11,7 +11,9 @@
 (setq column-number-mode t)
 (menu-bar-mode -1)
 ;; For Emacs 29.
-;; (pixel-scroll-precision-mode t)
+(pixel-scroll-precision-mode t)
+
+(load-theme 'modus-vivendi)
 
 (setq org-edit-src-content-indentation 0
       org-src-tab-acts-natively t
@@ -40,11 +42,6 @@
 ;; first grab use-package :3
 (straight-use-package 'use-package)
 (use-package el-patch :straight t)
-(use-package monokai-pro-theme
-  :straight t
-  :config (load-theme 'monokai-pro-spectrum t))
-(use-package nano-theme
-  :straight t)
 (use-package doom-modeline
   :straight t
   :init (doom-modeline-mode 1)
@@ -110,9 +107,36 @@
   :bind ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward))
 
+(use-package org-modern :straight t)
+(add-hook 'org-mode-hook #'org-modern-mode)
+(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
+(setq
+ ;; Edit settings
+ ;;org-auto-align-tags nil
+ ;;org-tags-column 0
+ org-catch-invisible-edits 'show-and-error
+ org-special-ctrl-a/e t
+ org-insert-heading-respect-content t
+
+ ;; Org styling, hide markup etc.
+ org-hide-emphasis-markers t
+ org-pretty-entities t
+ org-ellipsis " >"
+
+ ;; Agenda styling
+ org-agenda-tags-column 0
+ org-agenda-block-separator ?─
+ org-agenda-time-grid
+ '((daily today require-timed)
+   (800 1000 1200 1400 1600 1800 2000)
+   " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+ org-agenda-current-time-string
+ "⭠ now ─────────────────────────────────────────────────")
+
 ;; lsp-mode stuff
 (use-package eglot :straight t
-	     :config (add-hook 'go-mode-hook 'eglot-ensure))
+  :config (add-hook 'go-mode-hook 'eglot-ensure))
 (use-package company :straight t
   :config
   (add-hook 'after-init-hook 'global-company-mode)
@@ -132,7 +156,7 @@
   :hook (k8s-mode . yas-minor-mode))
 (use-package kubernetes :straight t)
 (use-package rust-mode :straight t)
-
+(use-package markdown-mode :straight t)
 (use-package olivetti :straight t)
 
 ;; Adapted from https://github.com/Slackwise/dotfiles/blob/master/emacs/slackwise.el
